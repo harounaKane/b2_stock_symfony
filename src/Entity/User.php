@@ -166,7 +166,3 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 }
 
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/harounaKane/b2_stock_symfony.git
-git push -u origin main
