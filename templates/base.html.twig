@@ -16,10 +16,16 @@
                 <a href=".">Gestion de stock</a>
             </h1>
             <nav>
-                <a href="" class="btn btn-success">gestion article</a>
-                <a href="" class="btn btn-danger">Déconnexion</a>
-                <a href="{{path('app_register')}}" class="btn btn-success">Inscription</a>
-                <a href="" class="btn btn-success">Connexion</a>
+                {% if app.user %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="" class="btn btn-success">gestion article</a>
+                    {% endif %}                    
+                    <a href="{{path('app_logout')}}" class="btn btn-danger">Déconnexion</a>
+                {% else %}
+                    <a href="{{path('app_register')}}" class="btn btn-success">Inscription</a>
+                    <a href="{{path('app_login')}}" class="btn btn-success">Connexion</a>
+                {% endif %}
+
             </nav>
         </header>
        
