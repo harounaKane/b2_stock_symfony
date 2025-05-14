@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\User;
 use App\Form\ArticleForm;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class ArticleController extends AbstractController
@@ -24,19 +26,20 @@ final class ArticleController extends AbstractController
 
     #[Route('/article/new', name: 'app_article_new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, #[CurrentUser] ?User $user): Response
     {
         $article = new Article();
         $form = $this->createForm(ArticleForm::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $article->setUser( $user );
+
             $entityManager->persist($article);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
         }
-
         return $this->render('article/new.html.twig', [
             'article' => $article,
             'form' => $form,

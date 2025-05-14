@@ -12,6 +12,7 @@
                 <th>Libelle</th>
                 <th>Prix</th>
                 <th>Quantite</th>
+                <th>Auteur</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ article.libelle }}</td>
                 <td>{{ article.prix }}</td>
                 <td>{{ article.quantite }}</td>
+                <td>{{ article.user.prenom }}</td>
                 <td>
                     <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
                     <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
