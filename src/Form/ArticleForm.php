@@ -6,6 +6,7 @@ use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ArticleForm extends AbstractType
 {
@@ -15,6 +16,11 @@ class ArticleForm extends AbstractType
             ->add('libelle')
             ->add('prix')
             ->add('quantite')
+            ->add("imageFile", VichImageType::class, [
+                'required' => false,
+                "allow_delete" => true,
+                "download_uri" => true
+            ])
         ;
     }
 
