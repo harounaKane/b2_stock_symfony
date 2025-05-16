@@ -17,12 +17,12 @@
         <header class="bg-light p-4 mb-5">
             <img src="{{ asset('img/stock.jpeg') }}" alt="image stock">
             <h1 class="text-center">
-                <a href=".">Gestion de stock</a>
+                <a href="{{path('app_article_index')}}">Gestion de stock</a>
             </h1>
             <nav>
                 {% if app.user %}
                     {% if is_granted('ROLE_ADMIN') %}
-                        <a href="" class="btn btn-success">gestion article</a>
+                        <a href="{{path('app_article_index')}}" class="btn btn-success">gestion article</a>
                     {% endif %}                    
                     <a href="{{path('app_logout')}}" class="btn btn-danger">Déconnexion</a>
                 {% else %}

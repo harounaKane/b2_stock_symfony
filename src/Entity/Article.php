@@ -36,7 +36,7 @@ class Article
     #[Vich\UploadableField(mapping: 'image_article', fileNameProperty: 'photo')]
     private ?File $imageFile = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 150, nullable: true)]
     private ?string $photo = null;
 
     #[ORM\Column]
@@ -119,7 +119,7 @@ class Article
         return $this->photo;
     }
 
-    public function setPhoto(string $photo): static
+    public function setPhoto(?string $photo): static
     {
         $this->photo = $photo;
 
